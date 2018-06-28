@@ -1,0 +1,7 @@
+schemaVersion: "2.0.0"
+
+fileExistenceTests:
+- name: 'Tarball'
+  isDirectory: false
+  path: '/test_r3.tar.gz'
+  shouldExist: true
