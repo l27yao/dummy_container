@@ -1,0 +1,15 @@
+steps:
+  - name: 'gcr.io/cloud-builders/bazel'
+    args: [
+      'run',
+      '//container/ubuntu16_04/builders/rbe-ubuntu16_04:toolchain'
+    ]
+    id: 'container-build'
+    waitFor:
+    - "-" # wait for nothing - start immediately
+
+  - name: 'gcr.io/cloud-builders/bazel'
+    args: [
+      'test',
+      '//container/ubuntu16_04/builders/rbe-ubuntu16_04:toolchain-test'
+    ]

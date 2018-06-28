@@ -14,7 +14,7 @@ container_image(
         "-c",
         "/bin/bash",
     ],
-    files = ["@my_tar//file"],
+    tars = ["@my_tar//file"],
 )
 
 container_test(
@@ -23,5 +23,4 @@ container_test(
         ":rbe-ubuntu16_04.yaml",
     ],
     image = ":toolchain",
-    verbose = True,
 )

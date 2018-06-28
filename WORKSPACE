@@ -17,6 +17,11 @@ load(
 
 container_repositories()
 
+load(
+    "@io_bazel_rules_docker//contrib:test.bzl",
+    "container_test",
+)
+
 http_archive(
     name = "io_bazel_rules_go",
     sha256 = "4b14d8dd31c6dbaf3ff871adcd03f28c3274e42abc855cb8fb4d01233c0154dc",
