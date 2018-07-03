@@ -34,21 +34,22 @@ go_rules_dependencies()
 
 go_register_toolchains()
 
+load(
+    "//:pins.bzl",
+    "TAR_REVISION",
+    "TAR_SHA256",
+    "UBUNTU16_04",
+)
+
 container_pull(
     name = "ubuntu16_04",
-    digest = "sha256:5125aac627c68226c6ad6083d0e3419bc6252bea1eb9d6e7258ecfd67233d655",
+    digest = UBUNTU16_04,
     registry = "gcr.io",
     repository = "cloud-marketplace/google/ubuntu16_04",
 )
 
-load(
-    "//:pins.bzl",
-    "REVISION",
-    "SHA256",
-)
-
 http_file(
     name = "my_tar",
-    sha256 = SHA256,
-    urls = ["https://storage.googleapis.com/quickstart-lei/test_" + REVISION + ".tar.gz"],
+    sha256 = TAR_SHA256,
+    urls = ["https://storage.googleapis.com/quickstart-lei/test_" + TAR_REVISION + ".tar.gz"],
 )
