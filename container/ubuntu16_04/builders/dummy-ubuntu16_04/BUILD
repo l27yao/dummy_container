@@ -7,7 +7,7 @@ load("@io_bazel_rules_docker//container:image.bzl", "container_image")
 load("@io_bazel_rules_docker//contrib:test.bzl", "container_test")
 
 container_image(
-    name = "toolchain",
+    name = "dummy",
     base = "@ubuntu16_04//image",
     cmd = [
         "/bin/sh",
@@ -18,9 +18,9 @@ container_image(
 )
 
 container_test(
-    name = "toolchain-test",
+    name = "dummy-test",
     configs = [
-        ":rbe-ubuntu16_04.yaml",
+        ":dummy-ubuntu16_04.yaml",
     ],
-    image = ":toolchain",
+    image = ":dummy",
 )

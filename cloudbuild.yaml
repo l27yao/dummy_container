@@ -2,14 +2,25 @@ steps:
   - name: 'gcr.io/cloud-builders/bazel'
     args: [
       'run',
-      '//container/ubuntu16_04/builders/rbe-ubuntu16_04:toolchain'
+      '//container/ubuntu16_04/builders/dummy-ubuntu16_04:dummy'
     ]
     id: 'container-build'
     waitFor:
     - "-" # wait for nothing - start immediately
 
+# Step: re-tag the image
+  - name: gcr.io/cloud-builders/docker
+    args: ['tag', 'bazel/container/ubuntu16_04/builders/dummy-ubuntu16_04:dummy', 'gcr.io/quickstart-lei/dummy:latest']
+    id: 'container-tag'
+    waitFor: # wait for all artifacts to be ready
+    - 'container-build'
+
   - name: 'gcr.io/cloud-builders/bazel'
     args: [
       'test',
-      '//container/ubuntu16_04/builders/rbe-ubuntu16_04:toolchain-test'
+      '//container/ubuntu16_04/builders/dummy-ubuntu16_04:dummy-test'
     ]
+
+# Build the release-container
+images:
+  - 'gcr.io/quickstart-lei/dummy:latest'
