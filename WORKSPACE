@@ -36,20 +36,18 @@ go_register_toolchains()
 
 load(
     "//:pins.bzl",
-    "TAR_REVISION",
-    "TAR_SHA256",
-    "UBUNTU16_04",
+    "pins",
 )
 
 container_pull(
     name = "ubuntu16_04",
-    digest = UBUNTU16_04,
+    digest = pins()["UBUNTU16_04"],
     registry = "gcr.io",
     repository = "cloud-marketplace/google/ubuntu16_04",
 )
 
 http_file(
     name = "my_tar",
-    sha256 = TAR_SHA256,
-    urls = ["https://storage.googleapis.com/quickstart-lei/test_" + TAR_REVISION + ".tar.gz"],
+    sha256 = pins()["TAR_SHA256"],
+    urls = ["https://storage.googleapis.com/quickstart-lei/test_" + pins()["TAR_REVISION"] + ".tar.gz"],
 )
